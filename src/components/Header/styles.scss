@@ -1,0 +1,67 @@
+@import "../../styles/variables.scss";
+
+header.main {
+  background-color: $background-color;
+  border-bottom: solid 2px $border-color;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 25px;
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+
+    @include breakpoint-small {
+      width: 20%;
+    }
+
+    @include breakpoint-medium {
+      width: 36%;
+    }
+
+    @include breakpoint-large {
+      width: 30%;
+    }
+  }
+
+  h1 {
+    color: $text-color;
+    font-family: $text-font;
+    font-size: 34px;
+
+    @include breakpoint-small {
+      font-size: 28px;
+    }
+
+    @include breakpoint-medium {
+      font-size: 38px;
+    }
+
+    @include breakpoint-large {
+      font-size: 42px;
+    }
+  }
+
+  p {
+    color: $smooth-text;
+    align-self: flex-end;
+    font-size: 16px;
+  }
+
+  button.sign-out {
+    background-color: $blue-button;
+    color: $text-button;
+    border: 1px solid $blue-button;
+    border-radius: 4px;
+    padding: 8px 15px;
+    height: 40px;
+    align-self: center;
+    font-size: 16px;
+  }
+
+  button.sign-out:hover {
+    cursor: pointer;
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,35 @@
+$background-color:#F8F9FA;
+$green-button: #28A745;
+$blue-button: #027BFF;
+$text-button: #FFFFFF;
+$text-color: #343A40;
+$border-color:#E8ECEF;
+$smooth-text: #929292;
+
+$text-font: 'Roboto', sans-serif;
+$text-font: 'Cinzel', serif;
+
+@mixin breakpoint($min-width) {
+    @media only screen and (min-width: $min-width) {
+      @content;
+    }
+  }
+  
+  @mixin breakpoint-small {
+    @include breakpoint(400px) {
+      @content;
+    }
+  }
+
+  @mixin breakpoint-medium {
+    @include breakpoint(600px) {
+      @content;
+    }
+  }
+  
+  
+  @mixin breakpoint-large {
+    @include breakpoint(1200px) {
+      @content;
+    }
+  }

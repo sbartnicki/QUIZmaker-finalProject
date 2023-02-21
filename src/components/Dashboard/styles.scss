@@ -1,0 +1,42 @@
+@import '../../styles/variables.scss';
+
+.dashboard-comp {
+    
+    .dashboard-no-header {
+        background-color: $background-color;
+        height: 800px; /*FIX IT*/
+        display: flex;
+        flex-direction: row;
+    }
+
+    .dashboard-main {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        justify-content: center;
+        width: 75%;
+        align-items: center;
+    }
+
+    button.create-button {
+        background-color:$green-button;
+        color:$text-button;
+        border: 1px solid $green-button;
+        border-radius: 5px;
+        width: 200px;
+        padding: 8px 15px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    button.create-button:hover {
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .dashboard-text {
+        font-weight: bold;
+        font-size: 18px;
+    }
+  
+}
