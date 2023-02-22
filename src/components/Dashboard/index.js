@@ -1,5 +1,6 @@
 import Header from "./../Header";
 import QuizzesList from "./QuizzesList";
+import Footer from "../Footer";
 
 import './styles.scss';
 
@@ -9,10 +10,10 @@ export default function Dashboard() {
   return (
     <div className="dashboard-comp">
       <Header />
-      <div className="dashboard-no-header">
+      <div className="quiz-list-and-main">
         <QuizzesList />
 
-        <div className="dashboard-main">
+        <div className="quiz-creation">
           <button onClick={handleCreateQuiz} className="create-button" title="Create Button">Create a new quiz</button>
           <p className="dashboard-text">
             ... or select existing quiz from the list on the left in order to
@@ -20,6 +21,7 @@ export default function Dashboard() {
           </p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

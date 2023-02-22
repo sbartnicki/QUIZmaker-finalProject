@@ -1,15 +1,15 @@
 @import '../../styles/variables.scss';
 
 .dashboard-comp {
-    
-    .dashboard-no-header {
+
+    .quiz-list-and-main {
         background-color: $background-color;
-        height: 800px; /*FIX IT*/
+        min-height: 600px; 
         display: flex;
         flex-direction: row;
     }
 
-    .dashboard-main {
+    .quiz-creation {
         display: flex;
         flex-direction: column;
         align-self: center;
