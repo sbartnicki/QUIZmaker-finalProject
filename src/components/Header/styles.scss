@@ -10,33 +10,20 @@ header.main {
 
   .title {
     display: flex;
-    justify-content: space-between;
-    width: 28%;
-
-    @include breakpoint-small {
-      width: 20%;
-    }
-
-    @include breakpoint-medium {
-      width: 36%;
-    }
-
-    @include breakpoint-large {
-      width: 30%;
-    }
+    flex-direction: row;
   }
 
   h1 {
     color: $text-color;
     font-family: $text-font;
-    font-size: 34px;
+    font-size: 24px;
 
     @include breakpoint-small {
-      font-size: 28px;
+      font-size: 24px ; 
     }
 
     @include breakpoint-medium {
-      font-size: 38px;
+      font-size: 36px;
     }
 
     @include breakpoint-large {
@@ -47,7 +34,19 @@ header.main {
   p {
     color: $smooth-text;
     align-self: flex-end;
-    font-size: 16px;
+    font-size: 14px;
+
+    @include breakpoint-small {
+      font-size: 15px ; 
+    }
+
+    @include breakpoint-medium {
+      font-size: 16px;
+    }
+
+    @include breakpoint-large {
+      font-size: 18px;
+    }
   }
 
   button.sign-out {
@@ -55,10 +54,23 @@ header.main {
     color: $text-button;
     border: 1px solid $blue-button;
     border-radius: 4px;
-    padding: 8px 15px;
+    padding: 8px 8px;
     height: 40px;
     align-self: center;
-    font-size: 16px;
+    font-size: 14px;
+
+    @include breakpoint-small {
+      font-size: 15px ; 
+    }
+
+    @include breakpoint-medium {
+      font-size: 16px;
+      padding: 8px 15px;
+    }
+
+    @include breakpoint-large {
+      font-size: 18px;
+    }
   }
 
   button.sign-out:hover {

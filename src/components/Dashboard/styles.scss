@@ -1,42 +1,50 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables.scss";
 
 .dashboard-comp {
+  .quiz-list-and-main {
+    background-color: $background-color;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
 
-    .quiz-list-and-main {
-        background-color: $background-color;
-        min-height: 600px; 
-        display: flex;
-        flex-direction: row;
+    @include breakpoint-medium {
+      flex-direction: row;
     }
+  }
 
-    .quiz-creation {
-        display: flex;
-        flex-direction: column;
-        align-self: center;
-        justify-content: center;
-        width: 75%;
-        align-items: center;
-    }
+  .quiz-creation {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    width: 75%;
+    align-items: center;
+    padding-top: 100px;
 
-    button.create-button {
-        background-color:$green-button;
-        color:$text-button;
-        border: 1px solid $green-button;
-        border-radius: 5px;
-        width: 200px;
-        padding: 8px 15px;
-        height: 40px;
-        font-size: 16px;
+    @include breakpoint-medium {
+      padding-top: 0px;
     }
+  }
 
-    button.create-button:hover {
-        cursor: pointer;
-        font-weight: bold;
-    }
+  button.create-button {
+    background-color: $green-button;
+    color: $text-button;
+    border: 1px solid $green-button;
+    border-radius: 5px;
+    width: 200px;
+    padding: 8px 15px;
+    height: 40px;
+    font-size: 16px;
+  }
 
-    .dashboard-text {
-        font-weight: bold;
-        font-size: 18px;
-    }
-  
+  button.create-button:hover {
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .dashboard-text {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 5px;
+  }
 }

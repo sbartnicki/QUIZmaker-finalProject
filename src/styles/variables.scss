@@ -16,7 +16,7 @@ $text-font: 'Cinzel', serif;
   }
   
   @mixin breakpoint-small {
-    @include breakpoint(450px) {
+    @include breakpoint(300px) {
       @content;
     }
   }
