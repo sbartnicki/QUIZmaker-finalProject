@@ -17,17 +17,17 @@ body {
   height: 100vh;
 }
 
-h1 {
+.initialPageTitle {
   font-weight: 300;
   font-size: 60px;
 }
 
-h2 {
+.titleForm {
   font-weight: 500;
   font-size: 40px;
 }
 
-h3 {
+.initialPageDescription {
   font-weight: 400;
   font-size: 20px;
 }
