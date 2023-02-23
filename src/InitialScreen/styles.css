@@ -1,0 +1,33 @@
+body {
+  font-family: 'Assistant', sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+
+  background-color: #F8F9FA;
+  text-align: center;
+}
+
+.verticalLine {
+  border-left: 3px solid #E9ECEF;
+  height: 100vh;
+}
+
+h1 {
+  font-weight: 300;
+  font-size: 60px;
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 40px;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 20px;
+}

@@ -1,5 +1,17 @@
+import { SignIn } from "./SignIn";
+import "./styles.css";
+
 export function InitialScreen() {
   return(
-    <h1>Hello World</h1>
+    <div className="wrapper">
+      <div>
+        <h1>QUIZ Maker</h1>
+        <h3>Let's make some quizzes!</h3>
+      </div>
+      <div className="verticalLine"></div>
+      <div>
+        <SignIn/>
+      </div>
+    </div>
   );
 }
