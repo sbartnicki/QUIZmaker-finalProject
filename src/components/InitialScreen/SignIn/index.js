@@ -21,7 +21,7 @@ export function SignIn() {
   const handleClickSignIn = (e) => {
     e.preventDefault();
 
-    // Validate the data
+    // Validate the data 
     const validate = [];
 
     if (email === "") {
