@@ -4,24 +4,24 @@ import "./styles.scss";
 
 export function SignIn() {
   const [title, setTitle] = useState("Welcome");
-  const [registered, setRegistered] = useState(false);
-  const [sentLink, setSentLink] = useState(false);
-  const [forgotPassword, setForgotPassword] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [registered, setRegistered] = useState(false);
+  const [forgotPassword, setForgotPassword] = useState(false);
+  const [sentLink, setSentLink] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
 
-
-  // Handle Functions
+  /**
+   * Sign In Handling function
+   */
   const handleClickSignIn = (e) => {
     e.preventDefault();
 
     // Validate the data
     const validate = [];
 
-    if (username === "") {
-      validate.push("The username is required.");
+    if (email === "") {
+      validate.push("The email is required.");
       setErrorMessages(validate);
     }
     if (password === "") {
@@ -35,14 +35,17 @@ export function SignIn() {
     }
   }
 
+  /**
+   * Register Handling function
+   */
   const handleClickRegister = (e) => {
     e.preventDefault();
 
     // Validate the data
     const validate = [];
 
-    if (username === "") {
-      validate.push("The username is required.");
+    if (email === "") {
+      validate.push("The email is required.");
       setErrorMessages(validate);
     }
     if (password === "") {
@@ -56,12 +59,18 @@ export function SignIn() {
     }
   }
 
+  /**
+   * Forgot Password Handling function
+   */
   const handleForgotPassword = () => {
     setErrorMessages([]);
     setForgotPassword(true);
     setTitle("Password Reminder");
   }
 
+  /**
+   * Reset Password Handling function
+   */
   const handleResetLink = (e) => {
     e.preventDefault();
 
@@ -69,6 +78,7 @@ export function SignIn() {
     const validate = [];
 
     if (email === "") {
+      setSentLink(false);
       validate.push("The email is required.");
       setErrorMessages(validate);
     }
@@ -79,6 +89,9 @@ export function SignIn() {
     }
   }
 
+  /**
+   * Return to Home Handling function
+   */
   const handleReturnHome = () => {
     console.log("Returned Home");
     setErrorMessages([]);
@@ -87,10 +100,7 @@ export function SignIn() {
     setTitle("Welcome");
   }
 
-  const handleSetUsername = (e) => {
-    setUsername(e.target.value);
-  }
-
+  // Handling input useState functions
   const handleSetPassword = (e) => {
     setPassword(e.target.value);
   }
@@ -110,9 +120,9 @@ export function SignIn() {
               <Input
                 type="text"
                 label="Login"
-                placeholder="Please enter username"
-                value={username}
-                handleOnChange={handleSetUsername}
+                placeholder="Please enter email"
+                value={email}
+                handleOnChange={handleSetEmail}
               />
               <Input
                 type="password"
