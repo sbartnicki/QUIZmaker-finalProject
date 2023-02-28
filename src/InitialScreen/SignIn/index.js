@@ -1,6 +1,6 @@
 import { Input } from "./Input";
 import { useState } from "react"
-import "./styles.css";
+import "./styles.scss";
 
 export function SignIn() {
   const [title, setTitle] = useState("Welcome");
@@ -38,11 +38,11 @@ export function SignIn() {
   }
 
   return(
-    <>
+    <div className="signIn-page">
       {/* Sign In and Register */}
       {forgotPassword === false &&
       <>
-        <h2 className="titleForm">{title}</h2>
+        <h2>{title}</h2>
         <div className="form-wrapper">
           <form>
             <Input 
@@ -55,7 +55,7 @@ export function SignIn() {
               label="Password"
               placeholder="Please enter password"
             />
-            {registered === false && <a className="linkInitialPage" href="#" onClick={handleForgotPassword}>Forgot password?</a>}
+            {registered === false && <a href="#" onClick={handleForgotPassword}>Forgot password?</a>}
 
             {registered && 
               <p className="warning-successful">Registered! You may sign in now</p>
@@ -74,7 +74,7 @@ export function SignIn() {
       {/* Forgot Password */}
       {forgotPassword &&
         <>
-          <h2 className="titleForm">{title}</h2>
+          <h2>{title}</h2>
           <div className="form-wrapper">
             <p className="message-forgotPassword">Please enter e-mail used for registration to reset your password.</p>
             <form>
@@ -92,12 +92,12 @@ export function SignIn() {
                 <button type="submit" onClick={handleResetLink}>Send reset link</button>
               </div>
 
-              <a className="linkInitialPage" href="#" onClick={handleReturnHome}>Go Back Home</a>
+              <a href="#" onClick={handleReturnHome}>Go Back Home</a>
 
             </form>
           </div>
         </>
       }
-    </>
+    </div>
   )
 }
