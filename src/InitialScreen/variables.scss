@@ -14,5 +14,21 @@ $successful-background-color: #C4E7CC;
 $successful-font-color: #165725;
 $successful-border-color: #ACCBB3;
 
+$error-background-color: #e7c4c4;
+$error-font-color: #571616;
+$error-border-color: #cbacac;
+
 $emphasis-color: #007BFF;
 $button-hover-color: #007bffb4;
+
+@mixin message($background, $font, $border) {
+  font-family: $body-font;
+  font-size: 12px;
+  border-radius: 3px;
+  text-align: left;
+  padding: .5rem .7rem;
+
+  background-color: $background;
+  color: $font;
+  border: 1px solid $border;
+}

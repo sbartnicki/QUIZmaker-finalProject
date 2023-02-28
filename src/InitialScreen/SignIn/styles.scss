@@ -25,16 +25,13 @@
     font-size: 12px;
     color: $emphasis-color;
   }
+
+  .warning-error {
+    @include message($error-background-color,$error-font-color, $error-border-color);
+  }
   
   .warning-successful {
-    font-family: $body-font;
-    font-size: 12px;
-    background-color: $successful-background-color;
-    color: $successful-font-color;
-    border: 1px solid $successful-border-color;
-    border-radius: 3px;
-    text-align: left;
-    padding: .5rem .7rem;
+    @include message($successful-background-color,$successful-font-color, $successful-border-color);
   }
   
   .message-forgotPassword {

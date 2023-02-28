@@ -1,8 +1,7 @@
 import { useState } from "react";
 import "./styles.scss";
 
-export function Input({label, type, placeholder}) {
-  const [input, setInput] = useState("");
+export function Input({label, type, placeholder, value, handleOnChange}) {
 
   return(
     <div className="input-wrapper">
@@ -11,8 +10,8 @@ export function Input({label, type, placeholder}) {
             id={label}
             type={type}
             placeholder={placeholder}
-            value={input}
-            onChange={(e) => {setInput(e.target.value)}}
+            value={value}
+            onChange={handleOnChange}
           />
       </div>
   )
