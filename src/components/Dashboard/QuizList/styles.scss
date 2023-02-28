@@ -1,0 +1,35 @@
+@import "../../../styles/variables.scss";
+
+.quizzes-list-comp {
+  background-color: $background-color;
+  border-bottom: solid 2px $border-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px 25px;
+
+  @include breakpoint-medium {
+    border-right: solid 2px $border-color;
+    width: 25%;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    background-color: $white-color;
+    padding: 10px;
+    border: 2px solid $border-color;
+    margin-bottom: 5px;
+    color: $text-color;
+  }
+
+  li:hover {
+    cursor: pointer;
+    background-color: $border-color;
+    font-weight: bold;
+  }
+}
