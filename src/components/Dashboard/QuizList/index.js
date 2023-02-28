@@ -1,7 +1,14 @@
-const QuizList = () => {
-    return (
-        <h2>Quiz List</h2>
-    )
-};
+import './styles.scss';
 
-export default QuizList;
+export default function QuizzesList() {
+  return (
+    <div className="quizzes-list-comp">
+      <h3>My quizzes:</h3>
+      <ul>
+        <li>Week 2 Quiz</li>
+        <li>MidTerm</li>
+        <li>Final Exam</li>
+      </ul>
+    </div>
+  );
+}
