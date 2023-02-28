@@ -1,25 +1,17 @@
 import Header from "./../Header";
-import QuizzesList from "./QuizzesList";
+import QuizList from "./QuizList";
+import CreateQuiz from "./CreateQuiz";
 import Footer from "../Footer";
 
-import './styles.scss';
+import "./styles.scss";
 
 export default function Dashboard() {
-  const handleCreateQuiz = () => {};
-
   return (
     <div className="dashboard-comp">
       <Header />
       <div className="quiz-list-and-main">
-        <QuizzesList />
-
-        <div className="quiz-creation">
-          <button onClick={handleCreateQuiz} className="create-button" title="Create Button">Create a new quiz</button>
-          <p className="dashboard-text">
-            ... or select existing quiz from the list on the left in order to
-            edit it
-          </p>
-        </div>
+        <QuizList />
+        <CreateQuiz />
       </div>
       <Footer />
     </div>

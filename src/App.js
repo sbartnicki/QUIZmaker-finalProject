@@ -1,11 +1,7 @@
-import Dashboard from "./components/Dashboard";
+import WelcomeScreen from "./components/WelcomeScreen";
 
 function App() {
-  return (
-    <>
-    <Dashboard/>
-    </>
-  );
+  return <WelcomeScreen />;
 }
 
 export default App;
