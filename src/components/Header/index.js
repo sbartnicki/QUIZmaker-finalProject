@@ -1,7 +1,13 @@
 import "./styles.scss";
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
-  const handleSignOut = () => {};
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    console.log("Signed Out");
+    navigate("/");
+  };
 
   return (
     <header className="main">
