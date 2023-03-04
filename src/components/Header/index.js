@@ -1,12 +1,13 @@
 import "./styles.scss";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-    const handleSignOut = () => {
-        navigate("/");
-    };
+  const handleSignOut = () => {
+    console.log("Signed Out");
+    navigate("/");
+  };
 
     return (
         <header className="main">

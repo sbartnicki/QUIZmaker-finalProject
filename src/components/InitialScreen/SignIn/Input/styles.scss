@@ -1,0 +1,29 @@
+@import './../../../../styles/variables.scss';
+
+.input-wrapper {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: $body-font;
+  font-size: 12px;
+
+  label {
+    display: inline-flex;
+    padding-left: 0.3rem;
+    align-items: center;
+    background-color: $secondary-color;
+    border: solid 1px $border-color;
+    border-radius: 5px 0px 0px 5px;
+    width: 3.8rem;
+    height: 2rem;
+    margin-right: 10px;
+  }
+
+  input {
+    height: 2rem;
+    padding-left: .3rem;
+    border: solid 1px $border-color;
+    border-radius: 0px 5px 5px 0px;
+  }
+}

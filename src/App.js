@@ -1,21 +1,13 @@
-import { Route, Routes } from "react-router-dom";
-import WelcomeScreen from "./components/WelcomeScreen";
-import Dashboard from "./components/Dashboard";
-import CreateQuiz from "./components/Dashboard/CreateQuiz";
-import NewQuiz from "./components/Dashboard/NewQuiz";
+import { BrowserRouter } from 'react-router-dom'
+import { Router } from './Router'
+
 
 function App() {
-    return (
-        <>
-            <Routes>
-                <Route path="/" element={ <WelcomeScreen/> }/>
-                <Route path="/dashboard" element={ <Dashboard/> }>
-                    <Route index element={ <CreateQuiz/> }/>
-                    <Route path="new" element={ <NewQuiz/> }/>
-                </Route>
-            </Routes>
-        </>
-    );
+  return (
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
+  );
 }
 
 export default App;
