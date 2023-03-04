@@ -12,7 +12,8 @@ const NewQuestion = ( { onQuestionEdit, question } ) => {
         setNewQuestion( oldQuestion => {
             return {
                 ...oldQuestion,
-                answers: oldQuestion.type === 'tf' ? oldQuestion.answers.slice(0, 2) : oldQuestion.answers,
+                answers: event.target.value === 'tf' ? oldQuestion.answers.slice( 0, 2 ) : oldQuestion.answers,
+                correctAns: [],
                 type: event.target.value
             }
         } );
@@ -39,17 +40,17 @@ const NewQuestion = ( { onQuestionEdit, question } ) => {
         } )
     }
 
-    const handleDeleteOption = (event) => {
+    const handleDeleteOption = ( event ) => {
         const answers = [...question.answers];
 
-        answers.splice(event.target.getAttribute('index'), 1);
+        answers.splice( event.target.getAttribute( 'index' ), 1 );
 
-        setNewQuestion(oldQuestion => {
+        setNewQuestion( oldQuestion => {
             return {
                 ...oldQuestion,
                 answers: answers
             }
-        })
+        } )
     }
 
     const handleAnswerChange = ( event ) => {
@@ -60,18 +61,18 @@ const NewQuestion = ( { onQuestionEdit, question } ) => {
         setNewQuestion( UPD_QUESTION )
     }
 
-    const handleCorrectAnswerUpdate = (event) => {
+    const handleCorrectAnswerUpdate = ( event ) => {
         let correctAns = question.correctAns;
 
         if (question.type === 'tf') {
-            correctAns = [event.target.getAttribute('index')];
+            correctAns = [event.target.getAttribute( 'index' )];
         } else {
             if (event.target.checked) {
-                correctAns.push(event.target.getAttribute('index'));
+                correctAns.push( event.target.getAttribute( 'index' ) );
             } else {
-                const VALUE_TO_DELETE = event.target.getAttribute('index');
+                const VALUE_TO_DELETE = event.target.getAttribute( 'index' );
 
-                correctAns.splice(correctAns.findIndex(item => item === VALUE_TO_DELETE), 1);
+                correctAns.splice( correctAns.findIndex( item => item === VALUE_TO_DELETE ), 1 );
             }
         }
 
@@ -80,7 +81,7 @@ const NewQuestion = ( { onQuestionEdit, question } ) => {
                 ...oldQuestion,
                 correctAns
             }
-        })
+        } )
 
     }
 
@@ -106,7 +107,16 @@ const NewQuestion = ( { onQuestionEdit, question } ) => {
                             <input type="text"
                                    index={ index }
                                    onChange={ handleAnswerChange }/>
-                            <input type={ question.type === 'tf' ? 'radio' : 'checkbox' } index={ index } name={ 'question-' + question.id } onChange={ handleCorrectAnswerUpdate } />
+                            {
+                                question.type === 'tf' &&
+                                <input type="radio" index={ index } name={ 'question-' + question.id }
+                                       onChange={ handleCorrectAnswerUpdate }/>
+                            }
+                            {
+                                question.type === 'mc' &&
+                                <input type="checkbox" index={ index } name={ 'question-' + question.id }
+                                       onChange={ handleCorrectAnswerUpdate }/>
+                            }
                             <button type="button" index={ index } onClick={ handleDeleteOption }>Delete</button>
                         </li>
                     } )

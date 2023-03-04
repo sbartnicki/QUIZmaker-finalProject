@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import NewQuestion from "./NewQuestion";
 
+import './styles.scss';
+
 const NewQuiz = () => {
 
     const [quiz, setQuiz] = useState(
@@ -72,6 +74,11 @@ const NewQuiz = () => {
     const handleFormSubmit = ( e ) => {
         e.preventDefault();
 
+        if (validateTitle()) {
+            console.warn( 'Quiz is supposed to have a title' );
+            return;
+        }
+
         if (validateAnswers()) {
             console.warn( 'All of the answers should be fulfilled' );
             return;
@@ -85,6 +92,10 @@ const NewQuiz = () => {
         console.log( 'Current quiz obj: ', quiz );
     }
 
+    const validateTitle = () => {
+        return !quiz.title.length;
+    }
+
     const validateCorrectAnswers = () => {
         return quiz.questions.find( question => !question.correctAns.length );
     }
@@ -94,12 +105,13 @@ const NewQuiz = () => {
     }
 
     return (
-        <div>
-            <h2>New Quiz</h2>
-            <form onSubmit={ handleFormSubmit }>
-                <label>
+        <div className="new-quiz">
+            <h2 className="new-quiz__title">New Quiz</h2>
+            <form className="new-quiz__form" onSubmit={ handleFormSubmit }>
+                <label className="new-quiz__label">
                     Title:
                     <input
+                        className="new-quiz__input"
                         name="title"
                         type="text"
                         value={ quiz.title }
@@ -117,9 +129,17 @@ const NewQuiz = () => {
                     )
                 }
 
-                <button type="button" onClick={ handleAddQuestion }>Add new question</button>
+                <button type="button"
+                        className="new-quiz__button"
+                        onClick={ handleAddQuestion }>
+                    Add new question
+                </button>
 
-                <button type="submit">Save Quiz</button>
+                <button
+                    className="new-quiz__button"
+                    type="submit">
+                    Save Quiz
+                </button>
 
             </form>
 
