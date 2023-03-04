@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import './styles.scss';
 
 const NewQuestion = ( { onQuestionEdit, question } ) => {
 
@@ -87,43 +88,46 @@ const NewQuestion = ( { onQuestionEdit, question } ) => {
 
 
     return (
-        <div>
-            <h2>Question #{ question.id }</h2>
-            <label>
+        <div className="new-question">
+            <div className="new-question__top">
+                <h3 className="new-question__title">Question #{ question.id }</h3>
+                <label className="new-question__label">
+                    Question type:
+                    <select className="new-question__select" name="type" onChange={ handleTypeChange }>
+                        <option className="new-question__option" value="tf">True/False</option>
+                        <option className="new-question__option" value="mc">Multiple Choice</option>
+                    </select>
+                </label>
+            </div>
+            <label className="new-question__label">
                 Question text:
-                <input name="text" type="text" onChange={ handleQuestionChange } value={ question.title }/>
+                <input className="new-question__input" name="text" type="text" onChange={ handleQuestionChange } value={ question.title }/>
             </label>
-            <label>
-                Question type:
-                <select name="type" onChange={ handleTypeChange }>
-                    <option value="tf">True/False</option>
-                    <option value="mc">Multiple Choice</option>
-                </select>
-            </label>
-            <ul>
+            <p>Answers: </p>
+            <ol className="new-question__list">
                 {
                     newQuestion.answers.map( ( option, index ) => {
-                        return <li key={ index }>
-                            <input type="text"
+                        return <li className="new-question__item" key={ index }>
+                            <input className="new-question__input answer" type="text"
                                    index={ index }
                                    onChange={ handleAnswerChange }/>
                             {
                                 question.type === 'tf' &&
-                                <input type="radio" index={ index } name={ 'question-' + question.id }
+                                <input className="new-question__input" type="radio" index={ index } name={ 'question-' + question.id }
                                        onChange={ handleCorrectAnswerUpdate }/>
                             }
                             {
                                 question.type === 'mc' &&
-                                <input type="checkbox" index={ index } name={ 'question-' + question.id }
+                                <input className="new-question__input" type="checkbox" index={ index } name={ 'question-' + question.id }
                                        onChange={ handleCorrectAnswerUpdate }/>
                             }
-                            <button type="button" index={ index } onClick={ handleDeleteOption }>Delete</button>
+                            <button className="new-question__button _red _ml-auto" type="button" index={ index } onClick={ handleDeleteOption }>Delete</button>
                         </li>
                     } )
                 }
-            </ul>
+            </ol>
             {
-                question.type === 'mc' && <button type="button" onClick={ handleAddOption }>Add new option</button>
+                question.type === 'mc' && <button className="new-question__button _blue _small" type="button" onClick={ handleAddOption }>Add new option</button>
             }
         </div>
     )

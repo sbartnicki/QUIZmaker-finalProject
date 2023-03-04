@@ -129,17 +129,20 @@ const NewQuiz = () => {
                     )
                 }
 
-                <button type="button"
-                        className="new-quiz__button"
+                <div className="new-quiz__actions">
+                    <button
+                        type="button"
+                        className="new-quiz__button _blue"
                         onClick={ handleAddQuestion }>
-                    Add new question
-                </button>
+                        Add new question
+                    </button>
 
-                <button
-                    className="new-quiz__button"
-                    type="submit">
-                    Save Quiz
-                </button>
+                    <button
+                        className="new-quiz__button _green _centered"
+                        type="submit">
+                        Save Quiz
+                    </button>
+                </div>
 
             </form>
 

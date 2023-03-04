@@ -1,0 +1,77 @@
+@import "/src/styles/variables";
+
+.new-question {
+  border: 1px solid $border-color;
+  padding: 10px;
+  margin: 20px 0;
+  border-radius: 6px;
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__input {
+    height: 2rem;
+    padding-left: .3rem;
+    border: solid 1px $border-color;
+    border-radius: 6px;
+
+    &.answer {
+      width: 80%;
+    }
+  }
+
+  &__button {
+    color: $white-color;
+    padding: .7rem;
+    border: 1px solid $blue-button;
+    border-radius: 5px;
+    font-weight: 200;
+    cursor: pointer;
+
+    &._blue {
+      background-color: $blue-button;
+
+      &:hover {
+        @include button-hover($blue-button);
+      }
+    }
+
+    &._green {
+      background-color: $green-button;
+
+      &:hover {
+        @include button-hover($green-button);
+      }
+    }
+
+    &._red {
+      background-color: $red-button;
+
+      &:hover {
+        @include button-hover($red-button);
+      }
+    }
+
+    &._ml-auto {
+      margin-left: auto;
+    }
+
+    &:hover {
+      @include button-hover($blue-button);
+    }
+  }
+}
