@@ -1,0 +1,14 @@
+@import "../../styles/variables.scss";
+
+.dashboard-comp {
+  .quiz-list-and-main {
+    background-color: $background-color;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+
+    @include breakpoint-medium {
+      flex-direction: row;
+    }
+  }
+}
