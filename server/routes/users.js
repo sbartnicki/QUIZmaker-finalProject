@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, validateUser } = require('../models/user');
 const { Quiz } = require('../models/quiz');
+const { sendEmail, validateEmail } = require('../services/email');
 
 router.get('/', async (req, res) => {
   const users = await User.find();
@@ -16,7 +17,23 @@ router.get('/:id', async (req, res) => {
   res.send(user);
 });
 
+router.post('/passwordreset', async (req, res) => {
+  const { error } = validateEmail(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  const user = await User.findOne({ email: req.body.email });
+  if (!user)
+    return res.status(400).send("User with given e-mail doesn't exist");
+
+  await sendEmail(req.body.email)
+    .then(() => res.send('Email Sent'))
+    .catch((err) => res.status(400).send(err.message));
+});
+
 router.post('/login', async (req, res) => {
+  const { error } = validateUser(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
   const user = await User.findOne({ email: req.body.email });
   if (!user)
     return res.status(400).send("User with given e-mail doesn't exist");
@@ -43,7 +60,9 @@ router.post('/', async (req, res) => {
 
   user = await user.save();
 
-  res.send({ user, message: 'User registered.' });
+  await sendEmail(req.body.email, true) // Set second parameter to true if this is confirmation email
+    .then(() => res.send('User registered. Confirmation email sent.'))
+    .catch((err) => res.status(400).send(err.message));
 });
 
 router.put('/:id', async (req, res) => {
