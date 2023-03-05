@@ -114,9 +114,19 @@ export function SignIn() {
       setErrorMessages(validate);
     }
     if (validate.length === 0) {
-      setErrorMessages([]);
-      setSentLink(true);
-      console.log('Password sent by email.');
+      axios
+        .post(`${apiURL}/passwordreset`, {
+          email,
+        })
+        .then((res) => {
+          setErrorMessages([]);
+          setSentLink(true);
+          console.log('Password sent by email.');
+        })
+        .catch((err) => {
+          validate.push(err.response.data);
+          setErrorMessages(validate);
+        });
     }
   };
 
