@@ -22,7 +22,7 @@
     font-weight: 300;
     font-size: 60px;
   }
-  
+
   h3 {
     font-family: $title-font;
     font-weight: 400;
@@ -34,11 +34,10 @@
     border: 2px solid $secondary-color;
     width: 100vw;
 
-
     @include breakpoint(800px) {
       border-left: 3px solid $secondary-color;
       height: 99vh;
       width: 0;
     }
-  }  
+  }
 }
