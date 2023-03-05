@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const users = require('./routes/users');
 const quizzes = require('./routes/quizzes');
 const mongoDbPass = process.env.DB_PASS;
+const cors = require('cors');
 
 mongoose
   .connect(
@@ -13,6 +14,7 @@ mongoose
   .then(() => console.log('Connected to MongoDB...'))
   .catch((err) => console.log(err.message));
 
+app.use(cors());
 app.use(express.json());
 app.use('/api/users', users);
 app.use('/api/quizzes', quizzes);
