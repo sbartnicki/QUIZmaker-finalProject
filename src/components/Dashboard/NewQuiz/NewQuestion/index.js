@@ -7,7 +7,7 @@ const NewQuestion = ( { onQuestionEdit, question } ) => {
 
     useEffect( () => {
         onQuestionEdit( newQuestion );
-    }, [newQuestion] );
+    }, [newQuestion, onQuestionEdit] );
 
     const handleTypeChange = ( event ) => {
         setNewQuestion( oldQuestion => {
