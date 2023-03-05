@@ -19,5 +19,5 @@ app.use(express.json());
 app.use('/api/users', users);
 app.use('/api/quizzes', quizzes);
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
 app.listen(port, () => console.log('Listening on port', port));
