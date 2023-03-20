@@ -1,0 +1,1 @@
+export const apiURL = 'https://quiz-server.herokuapp.com/api/';

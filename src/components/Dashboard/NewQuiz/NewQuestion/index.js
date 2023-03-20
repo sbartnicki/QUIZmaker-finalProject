@@ -1,96 +1,92 @@
-import { useEffect, useState } from "react";
 import './styles.scss';
+import Option from "../Option";
+import { v4 as uuidv4 } from "uuid";
 
-const NewQuestion = ( { onQuestionEdit, question } ) => {
-
-    const [newQuestion, setNewQuestion] = useState( question );
-
-    useEffect( () => {
-        onQuestionEdit( newQuestion );
-    }, [newQuestion, onQuestionEdit] );
-
+const NewQuestion = ( { onQuestionEdit, question, index } ) => {
     const handleTypeChange = ( event ) => {
-        setNewQuestion( oldQuestion => {
-            return {
-                ...oldQuestion,
-                answers: event.target.value === 'tf' ? oldQuestion.answers.slice( 0, 2 ) : oldQuestion.answers,
-                correctAns: [],
-                type: event.target.value
-            }
-        } );
+        const updatedQuestion = {
+            ...question,
+            options: event.target.value === 'tf' ? question.options.slice( 0, 2 ) : question.options,
+            type: event.target.value
+        };
+
+        updatedQuestion.options.forEach(option => {
+            option.isCorrect = false;
+        })
+
+        onQuestionEdit( updatedQuestion );
     }
 
     const handleQuestionChange = ( event ) => {
-        setNewQuestion( oldQuestion => {
-            return {
-                ...oldQuestion,
-                question: event.target.value
-            }
-        } );
+        const updatedQuestion = {
+            ...question,
+            question: event.target.value
+        };
+
+        onQuestionEdit( updatedQuestion )
     };
 
     const handleAddOption = () => {
-        setNewQuestion( oldQuestion => {
-            return {
-                ...oldQuestion,
-                answers: [
-                    ...oldQuestion.answers,
-                    ''
-                ]
-            }
-        } )
+        const updatedQuestion = {
+            ...question,
+            options: [
+                ...question.options,
+                {
+                    id: uuidv4(),
+                    text: '',
+                    isCorrect: false
+                }
+            ]
+        };
+
+        onQuestionEdit( updatedQuestion );
     }
 
-    const handleDeleteOption = ( event ) => {
-        const answers = [...question.answers];
+    const onHandleDeleteOption = ( event, id ) => {
+        const options = [...question.options].filter(option => option.id !== id);
 
-        answers.splice( event.target.getAttribute( 'index' ), 1 );
+        const updatedQuestion = {
+            ...question,
+            options
+        };
 
-        setNewQuestion( oldQuestion => {
-            return {
-                ...oldQuestion,
-                answers: answers
-            }
-        } )
+        onQuestionEdit( updatedQuestion );
     }
 
-    const handleAnswerChange = ( event ) => {
-        const UPD_QUESTION = newQuestion;
+    const onHandleAnswerChange = ( event, id ) => {
+        const updatedQuestion = question;
 
-        UPD_QUESTION.answers[event.target.getAttribute( 'index' )] = event.target.value;
+        updatedQuestion.options.find(option => option.id === id).text = event.target.value;
 
-        setNewQuestion( UPD_QUESTION )
+        onQuestionEdit( updatedQuestion );
     }
 
-    const handleCorrectAnswerUpdate = ( event ) => {
-        let correctAns = question.correctAns;
+    const onHandleCorrectAnswerUpdate = ( event, id ) => {
+        let newOptions = question.options;
 
         if (question.type === 'tf') {
-            correctAns = [event.target.getAttribute( 'index' )];
-        } else {
-            if (event.target.checked) {
-                correctAns.push( event.target.getAttribute( 'index' ) );
-            } else {
-                const VALUE_TO_DELETE = event.target.getAttribute( 'index' );
+            newOptions.forEach( option => {
+                option.isCorrect = false;
+            } );
 
-                correctAns.splice( correctAns.findIndex( item => item === VALUE_TO_DELETE ), 1 );
-            }
+            newOptions.find(option => option.id === id).isCorrect = true;
+        } else {
+            newOptions.find(option => option.id === id).isCorrect = event.target.checked;
         }
 
-        setNewQuestion( oldQuestion => {
-            return {
-                ...oldQuestion,
-                correctAns
-            }
-        } )
+        const updatedQuestion = {
+            ...question,
+            options: newOptions
+        }
 
+        onQuestionEdit( updatedQuestion );
     }
 
 
     return (
         <div className="new-question">
             <div className="new-question__top">
-                <h3 className="new-question__title">Question #{ question.id }</h3>
+                <h3 className="new-question__title">Question #{ index }</h3>
                 <label className="new-question__label">
                     Question type:
                     <select className="new-question__select" name="type" onChange={ handleTypeChange }>
@@ -101,33 +97,28 @@ const NewQuestion = ( { onQuestionEdit, question } ) => {
             </div>
             <label className="new-question__label">
                 Question text:
-                <input className="new-question__input" name="text" type="text" onChange={ handleQuestionChange } value={ question.title }/>
+                <input className="new-question__input" name="text" type="text" onChange={ handleQuestionChange }
+                       value={ question.title }/>
             </label>
             <p>Answers: </p>
             <ol className="new-question__list">
                 {
-                    newQuestion.answers.map( ( option, index ) => {
-                        return <li className="new-question__item" key={ index }>
-                            <input className="new-question__input answer" type="text"
-                                   index={ index }
-                                   onChange={ handleAnswerChange }/>
-                            {
-                                question.type === 'tf' &&
-                                <input className="new-question__input" type="radio" index={ index } name={ 'question-' + question.id }
-                                       onChange={ handleCorrectAnswerUpdate }/>
-                            }
-                            {
-                                question.type === 'mc' &&
-                                <input className="new-question__input" type="checkbox" index={ index } name={ 'question-' + question.id }
-                                       onChange={ handleCorrectAnswerUpdate }/>
-                            }
-                            <button className="new-question__button _red _ml-auto" type="button" index={ index } onClick={ handleDeleteOption }>Delete</button>
-                        </li>
+                    question.options.map( ( option, index ) => {
+                        return <Option
+                            key={ option.id }
+                            question={ question }
+                            option={ option }
+                            handleAnswerChange={ onHandleAnswerChange }
+                            handleCorrectAnswerUpdate={ onHandleCorrectAnswerUpdate }
+                            handleDeleteOption={ onHandleDeleteOption }
+                        />
                     } )
                 }
             </ol>
             {
-                question.type === 'mc' && <button className="new-question__button _blue _small" type="button" onClick={ handleAddOption }>Add new option</button>
+                question.type === 'mc' &&
+                <button className="new-question__button _blue _small" type="button" onClick={ handleAddOption }>Add new
+                    option</button>
             }
         </div>
     )

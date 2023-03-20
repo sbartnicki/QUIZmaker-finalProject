@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import './styles.scss';
+import { apiURL } from "../../../shared/constants";
 
 export function SignIn() {
   const [title, setTitle] = useState('Welcome');
@@ -15,7 +16,6 @@ export function SignIn() {
   const [errorMessages, setErrorMessages] = useState([]);
 
   const navigate = useNavigate();
-  const apiURL = 'https://quiz-server.herokuapp.com/api/users';
 
   /**
    * Sign In Handling function
@@ -115,7 +115,7 @@ export function SignIn() {
     }
     if (validate.length === 0) {
       axios
-        .post(`${apiURL}/passwordreset`, {
+        .post(`${apiURL}users/passwordreset`, {
           email,
         })
         .then((res) => {
