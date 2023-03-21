@@ -36,7 +36,7 @@ export function SignIn() {
     }
     if (validate.length === 0) {
       axios
-        .post(`${apiURL}/login`, {
+        .post(`${apiURL}users/login`, {
           email,
           password,
         })
