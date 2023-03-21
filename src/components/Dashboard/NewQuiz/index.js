@@ -119,7 +119,7 @@ const NewQuiz = () => {
             .then( res => {
                 console.log( 'res: ', res );
                 //TODO: Should be finished logic for dashboard rendering
-                navigate('/dashboard', { state: res.data });
+                navigate('/dashboard');
             } )
             .catch( error => {
                 console.warn( error );
