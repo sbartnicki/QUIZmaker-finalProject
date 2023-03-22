@@ -43,7 +43,7 @@ export function SignIn() {
         .then((res) => {
           setErrorMessages([]);
           setRegistered(false);
-          console.log('Signed In');
+          localStorage.setItem('userId', res.data[0].ownerId);
           navigate('/dashboard', { state: res.data });
         })
         .catch((err) => {
