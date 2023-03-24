@@ -36,15 +36,15 @@ export function SignIn() {
     }
     if (validate.length === 0) {
       axios
-        .post(`${apiURL}users/login`, {
+        .post(`${apiURL}auth`, {
           email,
           password,
         })
         .then((res) => {
           setErrorMessages([]);
           setRegistered(false);
-          localStorage.setItem('userId', res.data[0].ownerId);
-          navigate('/dashboard', { state: res.data });
+          localStorage.setItem('userId', res.headers.get('x-auth-token'));
+          navigate('/dashboard');
         })
         .catch((err) => {
           validate.push(err.response.data);

@@ -8,7 +8,11 @@ export default function QuizzesList() {
     const [quizTitles, setQuizTitles] = useState( [] );
 
     useEffect( () => {
-        axios.get( `${ apiURL }quizzes/` )
+        axios.get( `${ apiURL }quizzes`, {
+            headers: {
+                'x-auth-token': localStorage.getItem('userId')
+            }
+        })
             .then( res => {
                 setQuizTitles( res.data || []);
             } )

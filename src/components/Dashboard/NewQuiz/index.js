@@ -112,26 +112,26 @@ const NewQuiz = () => {
             return;
         }
 
-        const newQuiz = normalizeQuiz(quiz);
+        const newQuiz = normalizeQuiz( quiz );
 
 
         axios.post( `${ apiURL }quizzes/`, newQuiz )
             .then( res => {
                 console.log( 'res: ', res );
                 //TODO: Should be finished logic for dashboard rendering
-                navigate('/dashboard');
+                navigate( '/dashboard' );
             } )
             .catch( error => {
                 console.warn( error );
             } )
     }
 
-    const normalizeQuiz = (quiz) => {
+    const normalizeQuiz = ( quiz ) => {
         quiz.created = Date.now();
-        quiz.questions.map( question => {
+        quiz.questions.forEach( question => {
             delete question.id
 
-            question.options.map( option => {
+            question.options.forEach( option => {
                 delete option.id
             } )
         } );
