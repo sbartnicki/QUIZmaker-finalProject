@@ -10,7 +10,7 @@ export default function QuizzesList() {
     useEffect( () => {
         axios.get( `${ apiURL }quizzes`, {
             headers: {
-                'x-auth-token': localStorage.getItem('userId')
+                'x-auth-token': localStorage.getItem('token')
             }
         })
             .then( res => {

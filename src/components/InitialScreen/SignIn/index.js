@@ -43,7 +43,8 @@ export function SignIn() {
         .then((res) => {
           setErrorMessages([]);
           setRegistered(false);
-          localStorage.setItem('userId', res.headers.get('x-auth-token'));
+          localStorage.setItem('token', res.headers.get('x-auth-token'));
+          localStorage.setItem('userId', res.data.id);
           navigate('/dashboard');
         })
         .catch((err) => {
