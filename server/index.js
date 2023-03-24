@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 const users = require('./routes/users');
 const quizzes = require('./routes/quizzes');
+const quizzesUserAnswers = require('./routes/quizzesUserAnswers'); // LUIZ
 const mongoDbPass = process.env.DB_PASS;
 const cors = require('cors');
 
@@ -17,7 +18,8 @@ mongoose
 app.use(cors());
 app.use(express.json());
 app.use('/api/users', users);
-app.use('/api/quizzes', quizzes);
+app.use('/api/quizzes', quizzes); 
+app.use('/api/answers', quizzesUserAnswers);// LUIZ
 
 const port = process.env.PORT || 3002;
 app.listen(port, () => console.log('Listening on port', port));
