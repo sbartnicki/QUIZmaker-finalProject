@@ -8,7 +8,7 @@ import "./styles.scss";
 
 export function ResetPasswordPage() {
   const navigate = useNavigate();
-  const {token, userId} = useParams();
+  const { token, userId } = useParams();
 
   const [errorMessages, setErrorMessages] = useState([]);
   const [newPassword, setNewPassword] = useState("");
@@ -26,11 +26,13 @@ export function ResetPasswordPage() {
   }
 
   const settingNewPassword = async () => {
+    console.log("Token: ",token);
+
     await axios
       .post(`${apiURL}resets/password`, {
-        token,
-        userId,
-        newPassword
+        token: token,
+        userId: userId,
+        password: newPassword,
       })
       .then((res) => {
         setUpdatedPassword(true);
@@ -38,13 +40,13 @@ export function ResetPasswordPage() {
       .catch((error) => {
         console.warn(error);
         validate.push("Something went wrong. Please try again or contact support.");
-        setErrorMessages(validate);  
+        setErrorMessages(validate);
       });
   }
 
   const handleChangePassword = (e) => {
     e.preventDefault();
-    
+
     if (newPassword === "") {
       validate.push("The password is required.");
       setErrorMessages(validate);
@@ -56,7 +58,7 @@ export function ResetPasswordPage() {
       setNewPassword("");
     }
   }
-  
+
 
   return (
     <div className="resetPasswordPage">

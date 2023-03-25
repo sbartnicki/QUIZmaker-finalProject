@@ -16,10 +16,16 @@ export function VerifyPage() {
 
   useEffect(() => {
     (async () => {
+      console.log("UserId: ", userId);
+      const userData = {
+        token: token,
+        userId: userId
+      }
       await axios
-        .post(`${apiURL}users/verify`, {
-          token,
-          userId
+        .post(`${apiURL}users/verify`, userData, {
+          headers: {
+            'x-auth-token': token
+          } 
         })
         .then((res) => {
           setVerified(true);
