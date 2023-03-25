@@ -74,7 +74,7 @@ export function SignIn() {
     if (validate.length === 0) {
       // Using axios to send a POST request to our API
       axios
-        .post(apiURL, {
+        .post(`${apiURL}users`, {
           email,
           password,
         })
@@ -116,7 +116,7 @@ export function SignIn() {
     }
     if (validate.length === 0) {
       axios
-        .post(`${apiURL}users/passwordreset`, {
+        .post(`${apiURL}resets`, {
           email,
         })
         .then((res) => {
