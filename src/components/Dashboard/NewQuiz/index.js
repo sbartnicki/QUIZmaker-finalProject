@@ -1,37 +1,60 @@
-import { useEffect, useState } from "react";
-import NewQuestion from "./NewQuestion";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import './styles.scss';
+import NewQuestion from "./NewQuestion";
+import { apiURL } from "../../../shared/constants";
 
 const NewQuiz = () => {
 
+    const navigate = useNavigate();
+
     const [quiz, setQuiz] = useState(
         {
-            ownerId: null,
+            ownerId: localStorage.getItem( 'userId' ),
             created: null,
             title: '',
-            questions: []
+            questions: [
+                {
+                    id: uuidv4(),
+                    type: 'tf',
+                    question: '',
+                    options: [
+                        {
+                            id: uuidv4(),
+                            text: '',
+                            isCorrect: false
+                        },
+                        {
+                            id: uuidv4(),
+                            text: '',
+                            isCorrect: false
+                        }
+                    ]
+                }
+            ]
         }
     )
 
-    useEffect( () => {
-        const newQuestion = [createQuestion()];
-
-        setQuiz( currentQuiz => {
-            return {
-                ...currentQuiz,
-                questions: newQuestion
-            }
-        } );
-    }, [] );
-
     function createQuestion() {
         return {
-            id: quiz.questions.length,
+            id: uuidv4(),
             type: 'tf',
             question: '',
-            answers: Array( 2 ).fill( '' ),
-            correctAns: []
+            options: [
+                {
+                    id: uuidv4(),
+                    text: '',
+                    isCorrect: false
+                },
+                {
+                    id: uuidv4(),
+                    text: '',
+                    isCorrect: false
+                }
+            ]
         }
     }
 
@@ -59,11 +82,11 @@ const NewQuiz = () => {
 
     const handleQuestionEdit = ( question ) => {
         const updatedQuestions = [...quiz.questions];
-        updatedQuestions[question.id] = question;
+        const questionIndexToReplace = updatedQuestions.findIndex( item => item.id === question.id );
+        updatedQuestions[questionIndexToReplace] = question;
 
         setQuiz( currentQuiz => {
 
-            console.log( 'question: ', question );
             return {
                 ...currentQuiz,
                 questions: updatedQuestions
@@ -84,12 +107,36 @@ const NewQuiz = () => {
             return;
         }
 
-        if (validateCorrectAnswers()) {
+        if (!validateCorrectAnswers()) {
             console.warn( 'Each question should contain at least one correct answer' );
             return;
         }
 
-        console.log( 'Current quiz obj: ', quiz );
+        const newQuiz = normalizeQuiz( quiz );
+
+
+        axios.post( `${ apiURL }quizzes/`, newQuiz )
+            .then( res => {
+                console.log( 'res: ', res );
+                //TODO: Should be finished logic for dashboard rendering
+                navigate( '/dashboard' );
+            } )
+            .catch( error => {
+                console.warn( error );
+            } )
+    }
+
+    const normalizeQuiz = ( quiz ) => {
+        quiz.created = Date.now();
+        quiz.questions.forEach( question => {
+            delete question.id
+
+            question.options.forEach( option => {
+                delete option.id
+            } )
+        } );
+
+        return quiz;
     }
 
     const validateTitle = () => {
@@ -97,11 +144,22 @@ const NewQuiz = () => {
     }
 
     const validateCorrectAnswers = () => {
-        return quiz.questions.find( question => !question.correctAns.length );
+        let isValid = true;
+
+        quiz.questions.forEach( question => {
+            const correctAnswerIsPresent = question.options.find( option => option.isCorrect );
+
+            if (!correctAnswerIsPresent) {
+                console.log( 'question: ', question );
+                isValid = false;
+                return;
+            }
+        } );
+        return isValid;
     }
 
     const validateAnswers = () => {
-        return quiz.questions.find( question => question.answers.some( answer => !answer.length ) );
+        return quiz.questions.find( question => !question.options.length );
     }
 
     return (
@@ -124,6 +182,7 @@ const NewQuiz = () => {
                         <NewQuestion
                             key={ index }
                             question={ question }
+                            index={ index }
                             onQuestionEdit={ handleQuestionEdit }
                         />
                     )
