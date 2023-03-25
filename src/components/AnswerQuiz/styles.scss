@@ -1,0 +1,77 @@
+@import "./../../styles/variables.scss";
+
+.quiz-wrapper {
+  margin: 1rem;
+  width: 100%;
+
+  button {
+    color: $white-color;
+    padding: .7rem;
+    border: 1px solid $blue-button;
+    border-radius: 5px;
+    font-weight: 200;
+    cursor: pointer;
+    margin-bottom: 1rem;
+
+    &._blue {
+      background-color: $blue-button;
+
+      &:hover {
+        @include button-hover($blue-button);
+      }
+    }
+
+    &._green {
+      background-color: $green-button;
+
+      &:hover {
+        @include button-hover($green-button);
+      }
+    }
+
+    &._centered {
+      align-self: center;
+    }
+  }
+
+  .quiz-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .warning-error {
+    @include message($error-background-color,$error-font-color, $error-border-color);
+  }
+
+  .success-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5rem;
+
+    .score-quiz {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background-color: $white-color;
+      border: 2px solid $border-color;
+      color: $text-color;
+      width: 8rem;
+      margin-bottom: 1rem;
+  
+      h3 {
+        text-align: center;
+        margin: 0;
+      }
+    }
+
+    button {
+      margin-top: 1rem;
+      width: 15rem;
+    }
+  }
+
+}
