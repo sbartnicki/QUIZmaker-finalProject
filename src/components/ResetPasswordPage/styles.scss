@@ -1,0 +1,64 @@
+@import "./../../styles/variables.scss";
+
+.resetPasswordPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: $background-color;
+  text-align: center;
+
+  h2 {
+    font-family: $title-font;
+    font-weight: 500;
+    font-size: 40px;
+  }
+
+  .wrapper {
+    background-color: $background-lighter-color;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: solid 1px $border-lighter-color;
+    border-radius: 4px;
+    padding: 4rem;
+    max-width: 60vw;
+    max-height: 20vh;
+
+    @include breakpoint-medium {
+      max-width: 50vw;
+      max-height: 40vh;
+    }
+
+    @include breakpoint-large {
+      max-width: 40vw;
+      max-height: 30vh;
+    }
+
+    .warning-error {
+      @include message($error-background-color,$error-font-color, $error-border-color);
+    }
+  }
+  
+  button {
+    background-color: $blue-button;
+    color: $white-color;
+    padding: .7rem;
+    border: 1px solid $blue-button;
+    border-radius: 5px;
+    font-weight: 200;
+    cursor: pointer;
+    margin-top: 1rem;
+
+    &:hover {
+      @include button-hover($blue-button);
+    }
+  
+  } 
+}
