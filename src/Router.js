@@ -16,7 +16,8 @@ export function Router() {
                 <Route path="/dashboard" element={<Dashboard />}>
                     <Route index element={<CreateQuiz />} />
                     <Route path="new" element={<NewQuiz />} />
-                    <Route path="edit/:id" element={<NewQuiz />} />
+                    <Route path="edit/:id" element={<NewQuiz editMode={ true } />} />
+                    <Route path="clone/:id" element={<NewQuiz cloneMode={ true } />} />
                 </Route>
                 <Route path="/quiz/:id" element={<AnswerQuiz />} />
                 <Route path="/verify/:token/:userId" element={<VerifyPage />} />

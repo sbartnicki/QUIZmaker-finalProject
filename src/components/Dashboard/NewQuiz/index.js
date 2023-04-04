@@ -32,7 +32,7 @@ const NEW_QUIZ = {
     ],
 };
 
-const NewQuiz = () => {
+const NewQuiz = ( { editMode, cloneMode } ) => {
     const navigate = useNavigate();
     const params = useParams();
 
@@ -54,6 +54,11 @@ const NewQuiz = () => {
                 .then( res => {
                     if (res.data) {
                         const QUIZ = res.data;
+
+                        if (cloneMode) {
+                            delete QUIZ._id;
+                            delete QUIZ.__v;
+                        }
 
                         QUIZ.questions.forEach( question => {
                             question._id = uuidv4();
@@ -149,7 +154,7 @@ const NewQuiz = () => {
 
         const newQuiz = normalizeQuiz( quiz );
 
-        if (isNewQuiz) {
+        if (isNewQuiz || cloneMode) {
             axios
                 .post( `${ apiURL }quizzes/`, newQuiz )
                 .then( ( res ) => {

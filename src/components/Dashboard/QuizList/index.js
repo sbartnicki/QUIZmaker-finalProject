@@ -2,9 +2,11 @@ import './styles.scss';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { apiURL } from '../../../shared/constants';
-import { Link, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function QuizzesList( { setQuiz } ) {
+    const navigate = useNavigate();
+
     const [quizTitles, setQuizTitles] = useState( [] );
 
     useEffect( () => {
@@ -22,20 +24,27 @@ export default function QuizzesList( { setQuiz } ) {
             } );
     }, [] );
 
+    const editQuiz = ( id ) => {
+        navigate( `edit/${ id }` );
+    };
+
+    const cloneQuiz = ( id ) => {
+        navigate( `clone/${ id }` );
+    };
+
     return (
         <div className="quizzes-list-comp">
             <h3>My quizzes:</h3>
             <ul>
                 { quizTitles.map( ( item, index ) => (
                     <li
-                        key={ item._id }
+                        key={ index }
                     >
-                        <Link
-                            to={ `edit/${ item._id }` }
-                            onClick={ () => setQuiz( item ) }
-                        >
-                            { item.title }
-                        </Link>
+                        <span>{ item.title }</span>
+                        <div className="actions">
+                            <button onClick={ () => editQuiz( item._id ) }>Edit</button>
+                            <button onClick={ () => cloneQuiz( item._id ) }>Clone</button>
+                        </div>
                     </li>
                 ) ) }
             </ul>
