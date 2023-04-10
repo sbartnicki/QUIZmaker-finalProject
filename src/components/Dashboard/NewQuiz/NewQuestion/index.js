@@ -35,7 +35,7 @@ const NewQuestion = ({ onQuestionEdit, question, index }) => {
       options: [
         ...question.options,
         {
-          id: uuidv4(),
+          _id: uuidv4(),
           text: '',
           isCorrect: false,
         },
@@ -46,7 +46,7 @@ const NewQuestion = ({ onQuestionEdit, question, index }) => {
   };
 
   const onHandleDeleteOption = (event, id) => {
-    const options = [...question.options].filter((option) => option.id !== id);
+    const options = [...question.options].filter((option) => option._id !== id);
 
     const updatedQuestion = {
       ...question,
@@ -59,7 +59,7 @@ const NewQuestion = ({ onQuestionEdit, question, index }) => {
   const onHandleAnswerChange = (event, id) => {
     const updatedQuestion = question;
 
-    updatedQuestion.options.find((option) => option.id === id).text =
+    updatedQuestion.options.find((option) => option._id === id).text =
       event.target.value;
 
     onQuestionEdit(updatedQuestion);
@@ -73,9 +73,9 @@ const NewQuestion = ({ onQuestionEdit, question, index }) => {
         option.isCorrect = false;
       });
 
-      newOptions.find((option) => option.id === id).isCorrect = true;
+      newOptions.find((option) => option._id === id).isCorrect = true;
     } else {
-      newOptions.find((option) => option.id === id).isCorrect =
+      newOptions.find((option) => option._id === id).isCorrect =
         event.target.checked;
     }
 
@@ -114,15 +114,15 @@ const NewQuestion = ({ onQuestionEdit, question, index }) => {
           name="text"
           type="text"
           onChange={handleQuestionChange}
-          value={question.question} // Changed question.title to question.question, SLY
+          value={question.question}
         />
       </label>
       <p>Answers: </p>
       <ol className="new-question__list">
-        {question.options.map((option, index) => {
+        {question.options.map((option) => {
           return (
             <Option
-              key={option.id}
+              key={option._id}
               question={question}
               option={option}
               handleAnswerChange={onHandleAnswerChange}
