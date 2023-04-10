@@ -1,4 +1,4 @@
-@import "/src/styles/variables";
+@import '/src/styles/variables';
 
 .quizzes-list-comp {
   background-color: $background-color;
@@ -22,6 +22,7 @@
   li {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background-color: $white-color;
     padding: 10px;
     border: 2px solid $border-color;
@@ -33,5 +34,29 @@
     cursor: pointer;
     background-color: $border-color;
     font-weight: bold;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .draft-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .delete {
+      color: $red-button;
+    }
+
+    svg {
+      font-size: 1.5rem;
+      opacity: 0.2;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 }
