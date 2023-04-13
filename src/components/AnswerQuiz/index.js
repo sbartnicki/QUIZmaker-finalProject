@@ -38,8 +38,8 @@ export default function CreateQuiz() {
       await axios
         .get(`${apiURL}quizzes/`, {
           headers: {
-            'x-auth-token': localStorage.getItem('token')
-          }
+            "x-auth-token": localStorage.getItem("token"),
+          },
         })
         .then((res) => {
           const quizToAnswer = res.data.find((quiz) => quiz._id === params.id);
@@ -49,7 +49,7 @@ export default function CreateQuiz() {
           console.warn(error);
         });
     })();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleQuizSubmit = (e) => {
@@ -63,24 +63,25 @@ export default function CreateQuiz() {
         validate.push("All the questions are required to submit the quiz.");
         setErrorMessage(validate);
       }
-    })
+    });
 
     if (!errorMessage) {
       const answersQuiz = {
         quizId: params.id,
-        userId: localStorage.getItem('userId'),
+        userId: localStorage.getItem("userId"),
         questions: quizWithScore.questions,
-        score: quizWithScore.score
-      }
+        score: quizWithScore.score,
+      };
 
-      axios.post(`${apiURL}answers`, answersQuiz)
-        .then(res => {
-          console.log('res: ', res);
+      axios
+        .post(`${apiURL}answers`, answersQuiz)
+        .then((res) => {
+          console.log("res: ", res);
           setShowSuccess(true);
         })
-        .catch(error => {
+        .catch((error) => {
           console.warn(error);
-        })
+        });
     }
   };
 
@@ -108,19 +109,19 @@ export default function CreateQuiz() {
 
     // update the old quiz with the question answered
     newQuiz.questions = [...newQuestions];
-    console.log("@@@ newQuiz", newQuiz);
     setQuiz(newQuiz);
   };
 
   if (!quiz) {
-    return (<div className="dashboard-comp">
-      <Header />
-      <div className="quiz-list-and-main">
-        <QuizzesList />
-        <p>Loading...</p>
+    return (
+      <div className="dashboard-comp">
+        <Header />
+        <div className="quiz-list-and-main">
+          <p>Loading...</p>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>)
+    );
   }
 
   const addScore = (quizMissingScore) => {
@@ -173,22 +174,28 @@ export default function CreateQuiz() {
   const handleReturnDashboard = (e) => {
     e.preventDefault();
     navigate("/dashboard");
-  }
+  };
 
   return (
     <div className="dashboard-comp">
       <Header />
-      <div className="quiz-list-and-main">
-        <QuizzesList />
+      <div>
         <div className="quiz-wrapper">
-          {!showSuccess && (<form onSubmit={handleQuizSubmit}>
-            <h2>{quiz.title}</h2>
-            <Questions questions={questionsToRender} onChange={handleOnChange} />
-            <div className="quiz-footer">
-              {errorMessage && <div className="warning-error">{errorMessage}</div>}
-              <button className="_green">Submit Quiz</button>
-            </div>
-          </form>)}
+          {!showSuccess && (
+            <form onSubmit={handleQuizSubmit}>
+              <h2 className="quiz-title">{quiz.title}</h2>
+              <Questions
+                questions={questionsToRender}
+                onChange={handleOnChange}
+              />
+              <div className="quiz-footer">
+                {errorMessage && (
+                  <div className="warning-error">{errorMessage}</div>
+                )}
+                <button className="_green">Submit Quiz</button>
+              </div>
+            </form>
+          )}
 
           {showSuccess && (
             <div className="success-message">
@@ -197,13 +204,14 @@ export default function CreateQuiz() {
                 {quizWithScore.score} / {quizWithScore.questions.length}
               </div>
               <p>You successfully submitted your quiz answers!</p>
-              <button className="_blue" onClick={handleReturnDashboard}>Return to Dashboard</button>
+              <button className="_blue" onClick={handleReturnDashboard}>
+                Return to Dashboard
+              </button>
             </div>
           )}
         </div>
       </div>
       <Footer />
     </div>
-
   );
 }

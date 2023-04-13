@@ -1,31 +1,31 @@
-import { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import axios from 'axios';
-import { useNavigate, useOutletContext, useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 
-import './styles.scss';
-import NewQuestion from './NewQuestion';
-import { apiURL } from '../../../shared/constants';
+import "./styles.scss";
+import NewQuestion from "./NewQuestion";
+import { apiURL } from "../../../shared/constants";
 
 const NEW_QUIZ = {
-  ownerId: localStorage.getItem('userId'),
+  ownerId: localStorage.getItem("userId"),
   created: null,
-  title: '',
+  title: "",
   draft: false,
   questions: [
     {
       _id: uuidv4(),
-      type: 'tf',
-      question: '',
+      type: "tf",
+      question: "",
       options: [
         {
           _id: uuidv4(),
-          text: '',
+          text: "",
           isCorrect: false,
         },
         {
           _id: uuidv4(),
-          text: '',
+          text: "",
           isCorrect: false,
         },
       ],
@@ -39,7 +39,7 @@ const NewQuiz = ({ editMode, cloneMode }) => {
   const [trigger, setTrigger] = useOutletContext();
 
   const [savedQuiz, setSavedQuiz] = useState(false);
-  const [linkId, setLinkId] = useState('');
+  const [linkId, setLinkId] = useState("");
   const [quiz, setQuiz] = useState(null);
   const [isNewQuiz, setIsNewQuiz] = useState(false);
 
@@ -52,7 +52,7 @@ const NewQuiz = ({ editMode, cloneMode }) => {
       axios
         .get(`${apiURL}quizzes/${params.id}`, {
           headers: {
-            'x-auth-token': localStorage.getItem('token'),
+            "x-auth-token": localStorage.getItem("token"),
           },
         })
         .then((res) => {
@@ -84,17 +84,17 @@ const NewQuiz = ({ editMode, cloneMode }) => {
   function createQuestion() {
     return {
       _id: uuidv4(),
-      type: 'tf',
-      question: '',
+      type: "tf",
+      question: "",
       options: [
         {
           _id: uuidv4(),
-          text: '',
+          text: "",
           isCorrect: false,
         },
         {
           _id: uuidv4(),
-          text: '',
+          text: "",
           isCorrect: false,
         },
       ],
@@ -142,17 +142,17 @@ const NewQuiz = ({ editMode, cloneMode }) => {
     e.preventDefault();
 
     if (validateTitle()) {
-      console.warn('Quiz is supposed to have a title');
+      console.warn("Quiz is supposed to have a title");
       return;
     }
 
     if (validateAnswers()) {
-      console.warn('All of the answers should be fulfilled');
+      console.warn("All of the answers should be fulfilled");
       return;
     }
 
     if (!validateCorrectAnswers()) {
-      console.warn('Each question should contain at least one correct answer');
+      console.warn("Each question should contain at least one correct answer");
       return;
     }
 
@@ -172,12 +172,13 @@ const NewQuiz = ({ editMode, cloneMode }) => {
       axios
         .put(`${apiURL}quizzes/${quiz._id}`, newQuiz)
         .then((res) => {
-          console.log('res: ', res);
+          console.log("res: ", res);
+          setLinkId(res.data._id);
           setSavedQuiz(true);
           setTrigger(res.data);
         })
         .catch((err) => {
-          console.log('err: ', err);
+          console.log("err: ", err);
         });
     }
   };
@@ -222,7 +223,7 @@ const NewQuiz = ({ editMode, cloneMode }) => {
 
   const handleReturnDashboard = (e) => {
     e.preventDefault();
-    navigate('/dashboard');
+    navigate("/dashboard");
   };
 
   const handleRedirectQuiz = (e) => {
@@ -236,7 +237,7 @@ const NewQuiz = ({ editMode, cloneMode }) => {
         <>
           <h2 className="new-quiz__title">
             {isNewQuiz
-              ? 'New Quiz'
+              ? "New Quiz"
               : cloneMode
               ? `DUPLICATING: ${quiz.title}`
               : editMode

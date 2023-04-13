@@ -1,12 +1,16 @@
 @import "./../../styles/variables.scss";
 
 .quiz-wrapper {
-  margin: 1rem;
+  margin: 30px;
   width: 100%;
+
+  .quiz-title {
+    text-align: center;
+  }
 
   button {
     color: $white-color;
-    padding: .7rem;
+    padding: 0.7rem;
     border: 1px solid $blue-button;
     border-radius: 5px;
     font-weight: 200;
@@ -41,7 +45,11 @@
   }
 
   .warning-error {
-    @include message($error-background-color,$error-font-color, $error-border-color);
+    @include message(
+      $error-background-color,
+      $error-font-color,
+      $error-border-color
+    );
   }
 
   .success-message {
@@ -61,7 +69,7 @@
       color: $text-color;
       width: 8rem;
       margin-bottom: 1rem;
-  
+
       h3 {
         text-align: center;
         margin: 0;
@@ -73,5 +81,4 @@
       width: 15rem;
     }
   }
-
 }
