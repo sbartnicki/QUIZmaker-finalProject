@@ -49,6 +49,7 @@ export default function CreateQuiz() {
           console.warn(error);
         });
     })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleQuizSubmit = (e) => {

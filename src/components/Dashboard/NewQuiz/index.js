@@ -88,12 +88,12 @@ const NewQuiz = ({ editMode, cloneMode }) => {
       question: '',
       options: [
         {
-          id: uuidv4(),
+          _id: uuidv4(),
           text: '',
           isCorrect: false,
         },
         {
-          id: uuidv4(),
+          _id: uuidv4(),
           text: '',
           isCorrect: false,
         },

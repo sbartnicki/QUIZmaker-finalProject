@@ -41,7 +41,6 @@ const NewQuestion = ({ onQuestionEdit, question, index }) => {
         },
       ],
     };
-
     onQuestionEdit(updatedQuestion);
   };
 
