@@ -83,17 +83,17 @@ const NewQuiz = ({ editMode, cloneMode }) => {
 
   function createQuestion() {
     return {
-      id: uuidv4(),
+      _id: uuidv4(),
       type: 'tf',
       question: '',
       options: [
         {
-          id: uuidv4(),
+          _id: uuidv4(),
           text: '',
           isCorrect: false,
         },
         {
-          id: uuidv4(),
+          _id: uuidv4(),
           text: '',
           isCorrect: false,
         },
@@ -173,6 +173,7 @@ const NewQuiz = ({ editMode, cloneMode }) => {
         .put(`${apiURL}quizzes/${quiz._id}`, newQuiz)
         .then((res) => {
           console.log('res: ', res);
+          setSavedQuiz(true);
           setTrigger(res.data);
         })
         .catch((err) => {

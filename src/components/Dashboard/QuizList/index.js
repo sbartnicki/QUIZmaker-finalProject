@@ -24,9 +24,10 @@ export default function QuizzesList({ trigger }) {
         console.log('error: ', err);
       });
   };
+
   useEffect(() => {
     loadQuizzes();
-  }, [trigger]);
+  }, [trigger, navigate]);
 
   const editQuiz = (id) => {
     navigate(`edit/${id}`);

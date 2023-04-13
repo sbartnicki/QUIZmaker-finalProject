@@ -41,7 +41,6 @@ const NewQuestion = ({ onQuestionEdit, question, index }) => {
         },
       ],
     };
-
     onQuestionEdit(updatedQuestion);
   };
 
@@ -90,7 +89,7 @@ const NewQuestion = ({ onQuestionEdit, question, index }) => {
   return (
     <div className="new-question">
       <div className="new-question__top">
-        <h3 className="new-question__title">Question #{index}</h3>
+        <h3 className="new-question__title">Question #{index +1}</h3>
         <label className="new-question__label">
           Question type:
           <select

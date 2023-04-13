@@ -1,8 +1,7 @@
 import { Input } from './Input';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 import './styles.scss';
 import { apiURL } from "../../../shared/constants";
 
@@ -14,8 +13,19 @@ export function SignIn() {
   const [forgotPassword, setForgotPassword] = useState(false);
   const [sentLink, setSentLink] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+      const userToken = localStorage.getItem('token');
+      if (userToken) {
+        setIsLoggedIn(true);
+        return navigate('/dashboard');
+      }
+      setIsLoggedIn(false);
+    }, [isLoggedIn, navigate]);
+
 
   /**
    * Sign In Handling function

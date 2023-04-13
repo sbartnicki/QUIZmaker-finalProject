@@ -4,7 +4,7 @@ const Option = ({
   handleAnswerChange,
   handleCorrectAnswerUpdate,
   handleDeleteOption,
-}) => {
+}) => {  
   return (
     <li className="new-question__item">
       <input
@@ -27,16 +27,16 @@ const Option = ({
           onChange={(event) => handleCorrectAnswerUpdate(event, option._id)}
         />
       )}
-        {
-            question.options.length > 2 &&
-            <button
-                className="new-question__button _red _ml-auto"
-                type="button"
-                onClick={(event) => handleDeleteOption(event, option._id)}
-            >
-                Delete
-            </button>
-        }
+      {
+        question.options.length > 2 &&
+        <button
+          className="new-question__button _red _ml-auto"
+          type="button"
+          onClick={(event) => handleDeleteOption(event, option._id)}
+        >
+          Delete
+        </button>
+      }
     </li>
   );
 };
