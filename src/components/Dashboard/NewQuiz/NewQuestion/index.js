@@ -119,10 +119,10 @@ const NewQuestion = ({ onQuestionEdit, question, index }) => {
       </label>
       <p>Answers: </p>
       <ol className="new-question__list">
-        {question.options.map((option) => {
+        {question.options.map((option, index) => {
           return (
             <Option
-              key={option._id}
+              key={index}
               question={question}
               option={option}
               handleAnswerChange={onHandleAnswerChange}
