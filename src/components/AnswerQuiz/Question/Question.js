@@ -56,7 +56,7 @@ export default function Question({ question, index, onChange }) {
   return (
     <div className="quiz-question-wrapper">
       {/* question title */}
-      <h3>Question #{index} - {question.question}</h3>
+      <h3>Question #{index +1} - {question.question}</h3>
       <>{Options}</>
     </div>
   );
