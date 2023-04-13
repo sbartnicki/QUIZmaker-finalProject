@@ -1,27 +1,28 @@
-import './styles.scss';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { apiURL } from '../../../shared/constants';
-import { useNavigate } from 'react-router-dom';
-import { AiOutlineCopy, AiTwotoneDelete } from 'react-icons/ai';
+import "./styles.scss";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { apiURL } from "../../../shared/constants";
+import { useNavigate } from "react-router-dom";
+import { AiOutlineCopy, AiTwotoneDelete } from "react-icons/ai";
 
 export default function QuizzesList({ trigger }) {
   const navigate = useNavigate();
 
   const [quizTitles, setQuizTitles] = useState([]);
+  const [activeQuiz, setActiveQuiz] = useState(null);
 
   const loadQuizzes = () => {
     axios
       .get(`${apiURL}quizzes`, {
         headers: {
-          'x-auth-token': localStorage.getItem('token'),
+          "x-auth-token": localStorage.getItem("token"),
         },
       })
       .then((res) => {
         setQuizTitles(res.data || []);
       })
       .catch((err) => {
-        console.log('error: ', err);
+        console.log("error: ", err);
       });
   };
 
@@ -38,8 +39,8 @@ export default function QuizzesList({ trigger }) {
   };
 
   const deleteQuiz = (id) => {
-    axios.delete(apiURL + 'quizzes/' + id).then((res) => {
-      console.log('Deleted: ', res.data);
+    axios.delete(apiURL + "quizzes/" + id).then((res) => {
+      console.log("Deleted: ", res.data);
       loadQuizzes();
     });
   };
@@ -47,6 +48,7 @@ export default function QuizzesList({ trigger }) {
   const handleEditClick = (item, e) => {
     if (e.target === e.currentTarget) {
       editQuiz(item._id);
+      setActiveQuiz(item._id);
     }
   };
 
@@ -55,7 +57,11 @@ export default function QuizzesList({ trigger }) {
       <h3>My quizzes:</h3>
       <ul>
         {quizTitles.map((item, index) => (
-          <li key={index} onClick={(e) => handleEditClick(item, e)}>
+          <li
+            key={index}
+            onClick={(e) => handleEditClick(item, e)}
+            className={activeQuiz === item._id ? "active" : ""}
+          >
             <span>{item.title}</span>
             <div className="actions">
               {item.draft && <span className="draft-label">draft</span>}

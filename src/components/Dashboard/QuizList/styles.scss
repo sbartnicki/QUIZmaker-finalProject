@@ -1,4 +1,4 @@
-@import '/src/styles/variables';
+@import "/src/styles/variables";
 
 .quizzes-list-comp {
   background-color: $background-color;
@@ -28,6 +28,21 @@
     border: 2px solid $border-color;
     margin-bottom: 5px;
     color: $text-color;
+
+    &.active {
+      font-weight: bold;
+      background-color: $border-color;
+
+      .actions {
+        svg {
+          opacity: 0.7;
+        }
+
+        svg:hover {
+          opacity: 1;
+        }
+      }
+    }
   }
 
   li:hover {
