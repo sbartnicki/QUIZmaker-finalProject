@@ -1,5 +1,5 @@
 import './styles.scss';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -12,10 +12,12 @@ export default function Header() {
 
   return (
     <header className="main">
-      <div className="title">
-        <h1>QUIZ Maker</h1>
-        <p>Dashboard</p>
-      </div>
+      <NavLink to="/">
+        <div className="title">
+            <h1>QUIZ Maker</h1>
+            <p>Dashboard</p>
+        </div>
+      </NavLink>
       <button onClick={handleSignOut} title="Sign Out" className="sign-out">
         Sign out
       </button>

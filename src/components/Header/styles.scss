@@ -13,6 +13,11 @@ header.main {
     flex-direction: row;
   }
 
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
   h1 {
     font-family: $title-font;
     font-weight: 300;
