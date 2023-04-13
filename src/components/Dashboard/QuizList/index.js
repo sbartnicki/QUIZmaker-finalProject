@@ -46,7 +46,7 @@ export default function QuizzesList({ trigger }) {
   };
 
   const handleEditClick = (item, e) => {
-    if (e.target === e.currentTarget) {
+    if (e.target.innerText) {
       editQuiz(item._id);
       setActiveQuiz(item._id);
     }
