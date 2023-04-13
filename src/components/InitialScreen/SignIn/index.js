@@ -19,11 +19,11 @@ export function SignIn() {
 
   useEffect(() => {
       const userToken = localStorage.getItem('token');
-      if (!userToken || userToken === 'undefined') {
-        setIsLoggedIn(false);
+      if (userToken) {
+        setIsLoggedIn(true);
+        return navigate('/dashboard');
       }
-      setIsLoggedIn(true);
-      return navigate('/dashboard');
+      setIsLoggedIn(false);
     }, [isLoggedIn, navigate]);
 
 

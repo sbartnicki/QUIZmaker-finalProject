@@ -124,7 +124,6 @@ const NewQuiz = ({ editMode, cloneMode }) => {
   };
 
   const handleQuestionEdit = (question) => {
-    console.log("QUESTION IS:", question);
     const updatedQuestions = [...quiz.questions];
     const questionIndexToReplace = updatedQuestions.findIndex(
       (item) => item._id === question._id
