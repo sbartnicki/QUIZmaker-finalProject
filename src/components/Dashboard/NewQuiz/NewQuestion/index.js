@@ -1,8 +1,11 @@
 import './styles.scss';
 import Option from '../Option';
 import { v4 as uuidv4 } from 'uuid';
-import { AiOutlineCopy } from "react-icons/ai";
+import { AiOutlineCopy } from "react-icons/ai"; // ##### LUIZ #### 
 
+
+// ##### LUIZ #### 
+// I added onCloneQuestion as a parameter
 const NewQuestion = ({ onQuestionEdit, question, index, onCloneQuestion }) => {
   const handleTypeChange = (event) => {
     const updatedQuestion = {

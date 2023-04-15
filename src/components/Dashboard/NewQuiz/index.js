@@ -231,15 +231,14 @@ const NewQuiz = ({ editMode, cloneMode }) => {
     navigate(`/quiz/${linkId}`);
   };
 
-    // #### LUIZ 
-  // created handleCloneQuestion
+  // ##### LUIZ #### 
+  // New function 
   const handleCloneQuestion = (event, index) => {
     console.log('ENTROU no handleCloneQuestion --> quiz -->', quiz);
     console.log('ENTROU no handleCloneQuestion --> index -->', index);
 
     // Get the current question data in order to copy to new question 
     console.log('quiz.TITLE--> ', quiz.title);
-
     console.log('quiz.questions --> ', quiz.questions);
     console.log('quiz.questions lenght --> ', quiz.questions.length);
     console.log('quiz.questions.question--> ', quiz.questions[index].question);
@@ -295,7 +294,7 @@ const NewQuiz = ({ editMode, cloneMode }) => {
     console.log('NOVO QUIZ APOS ADICIONAR A QUESTAO DUPLICADA ==> ', quiz.questions);
 
   };
-  // #### end of LUIZ modifications
+  // #### end of LUIZ modifications #####
 
 
   return (
