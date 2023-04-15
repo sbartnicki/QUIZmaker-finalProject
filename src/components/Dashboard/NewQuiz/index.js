@@ -218,7 +218,7 @@ const NewQuiz = ({ editMode, cloneMode }) => {
   };
 
   const validateAnswers = () => {
-    return quiz.questions.find((question) => !question.options.length);
+    return quiz.questions.find( question => question.options.some( option => !option.text.length ) );
   };
 
   const handleReturnDashboard = (e) => {
