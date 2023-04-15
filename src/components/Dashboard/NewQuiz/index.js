@@ -231,6 +231,73 @@ const NewQuiz = ({ editMode, cloneMode }) => {
     navigate(`/quiz/${linkId}`);
   };
 
+    // #### LUIZ 
+  // created handleCloneQuestion
+  const handleCloneQuestion = (event, index) => {
+    console.log('ENTROU no handleCloneQuestion --> quiz -->', quiz);
+    console.log('ENTROU no handleCloneQuestion --> index -->', index);
+
+    // Get the current question data in order to copy to new question 
+    console.log('quiz.TITLE--> ', quiz.title);
+
+    console.log('quiz.questions --> ', quiz.questions);
+    console.log('quiz.questions lenght --> ', quiz.questions.length);
+    console.log('quiz.questions.question--> ', quiz.questions[index].question);
+    console.log('quiz.questions.type--> ', quiz.questions[index].type);
+    console.log('quiz.questions.options --> ', quiz.questions[index].options);
+
+
+    quiz.questions[index].options.forEach((option) => {
+      console.log('question.options ITEM --> ID : ', option._id);
+      console.log('question.options ITEM --> TEXT : ', option.text);
+      console.log('question.options ITEM --> iscorrect : ', option.isCorrect);
+      console.log('-------------------------------------');
+    });
+
+    const newQuestion = quiz.questions[index].question;
+    const newType = quiz.questions[index].type;
+    let isCorrectAux = false;
+
+    let newOptions = [];
+    quiz.questions[index].options.forEach((option) => {
+
+      if (option.isCorrect) {
+        isCorrectAux = true
+      } 
+      else {
+        isCorrectAux = false
+      }
+
+      newOptions.push(
+        {
+          _id: uuidv4(),
+          text: option.text,
+          isCorrect: isCorrectAux
+        },
+      );
+    });
+    console.log('NOVO VETOR DE OPÇOES ==> ', newOptions);
+
+
+    setQuiz((currentQuiz) => {
+      return {
+        ...currentQuiz,
+        questions: [...currentQuiz.questions,
+        {
+          _id: uuidv4(),
+          type: newType,
+          question: newQuestion,
+          options: newOptions
+        }],
+      };
+    });
+    console.log('---------------------------');
+    console.log('NOVO QUIZ APOS ADICIONAR A QUESTAO DUPLICADA ==> ', quiz.questions);
+
+  };
+  // #### end of LUIZ modifications
+
+
   return (
     <div className="new-quiz">
       {quiz && (
@@ -264,6 +331,7 @@ const NewQuiz = ({ editMode, cloneMode }) => {
                     question={question}
                     index={index}
                     onQuestionEdit={handleQuestionEdit}
+                    onCloneQuestion={handleCloneQuestion}
                   />
                 ))}
 
