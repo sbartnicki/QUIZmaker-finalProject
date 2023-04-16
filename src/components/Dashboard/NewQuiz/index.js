@@ -364,8 +364,12 @@ const NewQuiz = ({ editMode, cloneMode }) => {
             {savedQuiz && quiz && (
               <div className="saved-quiz">
                 Your quiz was succesfully saved!
-                <p className="link-quiz">
-                  Link: https://quiz-maker-two.vercel.app/quiz/{linkId}
+                <p className="link-quiz" onClick={handleRedirectQuiz}>
+                  Link:
+                  <span className="quiz-url">
+                    {" "}
+                    https://quiz-maker-two.vercel.app/quiz/{linkId}
+                  </span>{" "}
                 </p>
                 <div className="buttons-saved-quiz">
                   <button className=" _blue" onClick={handleRedirectQuiz}>
