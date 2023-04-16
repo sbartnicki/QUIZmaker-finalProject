@@ -79,6 +79,7 @@ const NewQuiz = ({ editMode, cloneMode }) => {
       setIsNewQuiz(true);
       setQuiz(NEW_QUIZ);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
   function createQuestion() {
@@ -164,6 +165,10 @@ const NewQuiz = ({ editMode, cloneMode }) => {
         .then((res) => {
           setLinkId(res.data._id);
           setSavedQuiz(true);
+          quiz.questions.forEach((question) => {
+            question.options.forEach((option) => option.text = "");
+            question.options.forEach((option) => option._id = uuidv4());
+          });
         })
         .catch((error) => {
           console.warn(error);
@@ -176,6 +181,10 @@ const NewQuiz = ({ editMode, cloneMode }) => {
           setLinkId(res.data._id);
           setSavedQuiz(true);
           setTrigger(res.data);
+          quiz.questions.forEach((question) => {
+            question.options.forEach((option) => option.text = "");
+            question.options.forEach((option) => option._id = uuidv4());
+          });
         })
         .catch((err) => {
           console.log("err: ", err);
@@ -231,28 +240,8 @@ const NewQuiz = ({ editMode, cloneMode }) => {
     navigate(`/quiz/${linkId}`);
   };
 
-  // ##### LUIZ #### 
   // New function 
   const handleCloneQuestion = (event, index) => {
-    console.log('ENTROU no handleCloneQuestion --> quiz -->', quiz);
-    console.log('ENTROU no handleCloneQuestion --> index -->', index);
-
-    // Get the current question data in order to copy to new question 
-    console.log('quiz.TITLE--> ', quiz.title);
-    console.log('quiz.questions --> ', quiz.questions);
-    console.log('quiz.questions lenght --> ', quiz.questions.length);
-    console.log('quiz.questions.question--> ', quiz.questions[index].question);
-    console.log('quiz.questions.type--> ', quiz.questions[index].type);
-    console.log('quiz.questions.options --> ', quiz.questions[index].options);
-
-
-    quiz.questions[index].options.forEach((option) => {
-      console.log('question.options ITEM --> ID : ', option._id);
-      console.log('question.options ITEM --> TEXT : ', option.text);
-      console.log('question.options ITEM --> iscorrect : ', option.isCorrect);
-      console.log('-------------------------------------');
-    });
-
     const newQuestion = quiz.questions[index].question;
     const newType = quiz.questions[index].type;
     let isCorrectAux = false;
@@ -275,7 +264,6 @@ const NewQuiz = ({ editMode, cloneMode }) => {
         },
       );
     });
-    console.log('NOVO VETOR DE OPÇOES ==> ', newOptions);
 
 
     setQuiz((currentQuiz) => {
@@ -290,12 +278,7 @@ const NewQuiz = ({ editMode, cloneMode }) => {
         }],
       };
     });
-    console.log('---------------------------');
-    console.log('NOVO QUIZ APOS ADICIONAR A QUESTAO DUPLICADA ==> ', quiz.questions);
-
   };
-  // #### end of LUIZ modifications #####
-
 
   return (
     <div className="new-quiz">
@@ -363,7 +346,7 @@ const NewQuiz = ({ editMode, cloneMode }) => {
 
             {savedQuiz && quiz && (
               <div className="saved-quiz">
-                Your quiz was succesfully saved!
+                Your quiz was successfully saved!
                 <p className="link-quiz" onClick={handleRedirectQuiz}>
                   Link:
                   <span className="quiz-url">
