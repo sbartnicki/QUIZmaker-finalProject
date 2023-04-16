@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Question from "./Question/Question.js";
 import "./styles.scss";
-import QuizzesList from "../Dashboard/QuizList";
 import Header from "../Header";
 import Footer from "../Footer";
 
