@@ -1,8 +1,12 @@
 import './styles.scss';
 import Option from '../Option';
 import { v4 as uuidv4 } from 'uuid';
+import { AiOutlineCopy } from "react-icons/ai"; // ##### LUIZ #### 
 
-const NewQuestion = ({ onQuestionEdit, question, index }) => {
+
+// ##### LUIZ #### 
+// I added onCloneQuestion as a parameter
+const NewQuestion = ({ onQuestionEdit, question, index, onCloneQuestion }) => {
   const handleTypeChange = (event) => {
     const updatedQuestion = {
       ...question,
@@ -90,6 +94,10 @@ const NewQuestion = ({ onQuestionEdit, question, index }) => {
     <div className="new-question">
       <div className="new-question__top">
         <h3 className="new-question__title">Question #{index +1}</h3>
+
+       {/* ##### LUIZ #### */}
+       <label> <strong>Duplicate</strong><AiOutlineCopy onClick={(event) => onCloneQuestion(event, index )} /> </label>
+
         <label className="new-question__label">
           Question type:
           <select
