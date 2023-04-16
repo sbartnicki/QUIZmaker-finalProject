@@ -166,7 +166,8 @@ const NewQuiz = ({ editMode, cloneMode }) => {
           setLinkId(res.data._id);
           setSavedQuiz(true);
           quiz.questions.forEach((question) => {
-            question.options.forEach((option) => option.text = "")
+            question.options.forEach((option) => option.text = "");
+            question.options.forEach((option) => option._id = uuidv4());
           });
         })
         .catch((error) => {
@@ -180,6 +181,10 @@ const NewQuiz = ({ editMode, cloneMode }) => {
           setLinkId(res.data._id);
           setSavedQuiz(true);
           setTrigger(res.data);
+          quiz.questions.forEach((question) => {
+            question.options.forEach((option) => option.text = "");
+            question.options.forEach((option) => option._id = uuidv4());
+          });
         })
         .catch((err) => {
           console.log("err: ", err);
